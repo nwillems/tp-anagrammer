@@ -1,1 +1,23 @@
 # Anagrammer
+
+
+Solution heavily inspired by the explanation of the problem from https://github.com/alexvish/trustpilot-anagram
+Didn't read the code, just the explanation, which if I may add, does a really
+good job.
+
+Although I would like to point out that the anagram creation, in python, takes
+20secs, whereas in Golang with a database it takes 1m.
+
+Rationale for using Python, it's easy to understand, write and reason about.
+And in the event that Python isn't fast enough, the code is easily converted to
+Golang.
+
+The current code finds the easy and medium secrets. I haven't debugged to find
+the hard one. But with a dictionary only containing the words from the hard
+sentence, it finds the corrects solution...
+
+The code is taken as an algorithmic challenge, and hence, a database was not
+chosen, also, no care has been given to actual testing, besides the small
+examples during development. Also code-style and other aspects commonly
+considered "good style" has not been considered, as it was understood to have
+fun with some algorithms.
