@@ -40,6 +40,16 @@ def mk_sentences(sentence, dictionary, depth=0):
             if len(new_sen.replace(" ", "")) == len(new_sentence.replace(" ", "")):
                 yield word + " " + new_sen
 
+
+def wrap_mk_sentences(sentence, dictionary, word):
+    new_sentence = remove_word(word, sentence)
+    dictionary = mk_true_dict(new_sentence, dictionary)
+    result = []
+    for new_sen in mk_sentences(sentence, dictionary):
+        result.append( word + " " + new_sen )
+
+    return result
+
 def get_dict():
     with open("wordlist", 'r') as f:
         for word in f:
@@ -72,7 +82,10 @@ def true_main():
 
     print("Reduced dictionary to: {} words".format(len(true_dict)))
 
-    sentences = list(mk_sentences(base_sentence, true_dict))
+    worker_pool = Pool(processes=10)
+    hard_work = functools.partial(wrap_mk_sentences, base_sentence, true_dict)
+    sentences_list = worker_pool.map(hard_work, true_dict)
+    # sentences = list(mk_sentences(base_sentence, true_dict))
     
     print( "Generated sentences: {},\n length: {}".format( list(sentences), len(sentences) ))
 
