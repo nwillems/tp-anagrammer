@@ -21,6 +21,7 @@ def remove_word(word, sentence):
         sentence = sentence[:idx] + sentence[idx+1:]
     return sentence
 
+@functools.lru_cache(maxsize=None)
 def mk_sentences(sentence, dictionary, depth=0):
     if depth % 10 == 0:
         print("Generating sentences from, depth: {}, sentence: \"{}\", dictionary size: {}".format(
